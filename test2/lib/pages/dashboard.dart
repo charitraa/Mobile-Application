@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class dashboardPage extends StatefulWidget {
   const dashboardPage({super.key});
@@ -11,7 +12,7 @@ class dashboardPage extends StatefulWidget {
 class _dashboardPageState extends State<dashboardPage> {
   horizontalscrollfunc(var size, var color) {
     return Container(
-      margin: EdgeInsets.only(left: 5),
+      margin: EdgeInsets.only(left: 10),
       width: size.width / 1.5,
       height: size.height / 5,
       decoration: BoxDecoration(
@@ -51,7 +52,60 @@ class _dashboardPageState extends State<dashboardPage> {
       )
     );
   }
-  
+  verticalscrollfunc(var size) {
+    return Container(
+        margin: EdgeInsets.only(bottom: 10, top: 10, left: 10),
+        width: size.width / 0.5,
+        height: size.height / 7,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+        child: Stack(
+            children:[
+              Container(
+                  height: size.height/7,
+                  width: size.width/2.5,
+                  child:ClipRRect(borderRadius:BorderRadius.circular(20),child: Image.asset("images/image (9).png",fit: BoxFit.cover,),)
+              ),
+              Positioned(
+                  top:5,
+                  right: 15,
+                  child:  Container(
+                      width: size.width/2,
+                      child:  Text("Welcome to the Mobile Application of pcps",
+                        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                        maxLines: 2,))
+              ),
+              Positioned(
+                  bottom:10,
+                  right: 5,
+                  child:  Container(
+                      width: size.width/3.5,
+                      child:  Text("Sep 20, 2024",
+                        style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                        maxLines: 1,overflow: TextOverflow.ellipsis,))
+              ),
+              Positioned(
+                  bottom:10,
+                  left: 175,
+                  child:  Container(
+                      width: size.width/4.5,
+                      decoration: BoxDecoration(
+                        color: Colors.red, // Move color here
+                        borderRadius: BorderRadius.circular(5), // Set border radius
+                      ),
+                      child:  Text("xyz.com",
+                        style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold), textAlign: TextAlign.center,
+                        maxLines: 1,overflow: TextOverflow.ellipsis,))
+              ),
+              Positioned(
+                  top: 40,
+                  left: 60,
+                  child:
+                  Icon(Icons.play_circle, size: 50,color: Colors.white,))
+            ]
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -89,7 +143,19 @@ class _dashboardPageState extends State<dashboardPage> {
                   return horizontalscrollfunc(size, 0xfffff1115);
                 }
             ),
+          ),
+          SizedBox(height: 10,),
+          Container(
+            height: size.height/1.45,
+            width: size.width/0.5,
+            child: ListView.builder(itemCount: 20,
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index){
+                  return verticalscrollfunc(size);
+                }
+            ),
           )
+
         ],
       ),
     );
