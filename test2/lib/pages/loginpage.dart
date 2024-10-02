@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test2/api/get.dart';
 import 'package:test2/pages/dashboard.dart'; // Make sure this path is correct
 
 class Loginpage extends StatefulWidget {
@@ -12,6 +13,10 @@ class Loginpage extends StatefulWidget {
 
 class Loginpagestate extends State<Loginpage> {
   @override
+  void initState(){
+    super.initState();
+    GetApi().getNewsApicall();
+  }
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
