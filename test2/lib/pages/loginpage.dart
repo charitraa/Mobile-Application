@@ -1,6 +1,11 @@
+import 'package:esewa_flutter_sdk/esewa_config.dart';
+import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
+import 'package:esewa_flutter_sdk/esewa_payment.dart';
+import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/api/get.dart';
-import 'package:test2/pages/dashboard.dart'; // Make sure this path is correct
+import 'package:test2/pages/dashboard.dart';
+import 'package:test2/static.dart'; // Make sure this path is correct
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -13,10 +18,43 @@ class Loginpage extends StatefulWidget {
 
 class Loginpagestate extends State<Loginpage> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
     GetApi().getNewsApicall();
   }
+
+  // Function to handle Esewa payment call
+  void esewapaymentcall() {
+    try {
+      EsewaFlutterSdk.initPayment(
+        esewaConfig: EsewaConfig(
+          environment: Environment.test,
+          clientId: StaticValue.CLIENT_ID,
+          secretId: StaticValue.SECRET_KEY,
+        ),
+        esewaPayment: EsewaPayment(
+          productId: "1d71jd81",
+          productName: "Product One",
+          productPrice: "20",
+          callbackUrl: '',
+        ),
+        onPaymentSuccess: (EsewaPaymentSuccessResult data) {
+          debugPrint(":::SUCCESS::: => $data");
+          // verifyTransactionStatus(data);
+        },
+        onPaymentFailure: (data) {
+          debugPrint(":::FAILURE::: => $data");
+        },
+        onPaymentCancellation: (data) {
+          debugPrint(":::CANCELLATION::: => $data");
+        },
+      );
+    } on Exception catch (e) {
+      debugPrint("EXCEPTION : ${e.toString()}");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
@@ -29,19 +67,16 @@ class Loginpagestate extends State<Loginpage> {
             children: [
               // Row with icons on each end
               SizedBox(
-                width:
-                    size.width / 1.2, // Adjust container width to match design
+                width: size.width / 1.2, // Adjust container width to match design
                 child: const Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceBetween, // Places icons at opposite ends
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Places icons at opposite ends
                   children: [
                     Icon(Icons.person, color: Colors.black, size: 50),
                     Icon(Icons.arrow_back, color: Colors.black, size: 50),
                   ],
                 ),
               ),
-              const SizedBox(
-                  height: 30), // Space between icons and form container
+              const SizedBox(height: 30), // Space between icons and form container
 
               // Login form container
               Container(
@@ -109,13 +144,7 @@ class Loginpagestate extends State<Loginpage> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const dashboardPage() // Navigate to DashboardPage
-                                ),
-                          );
+                          esewapaymentcall(); // Call the Esewa payment function here
                         },
                         child: Container(
                           width: size.width / 2.5,
@@ -127,8 +156,7 @@ class Loginpagestate extends State<Loginpage> {
                           child: const Center(
                             child: Text(
                               "Sign in",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                              style: TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ),
                         ),

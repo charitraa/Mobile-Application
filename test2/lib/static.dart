@@ -1,7 +1,9 @@
 class StaticValue{
   static String baseURL = "newapi.org";
   static String apiKey = "a25a0c0b883c4f389ff5c23da0f9dfea" ;
-  static String dummydata = '''
+  static String CLIENT_ID = "JB0BBQ4aD0UqIThFJwAKBgAXEUkEGQUBBAwdOgABHD4DChwUAB0R";
+  static String SECRET_KEY = "BhwIWQQADhIYSxILExMcAgFXFhcOBwAKBgAXEQ==";
+      static String dummydata = '''
   {
     "status": "ok",
     "totalResults": 8099,
