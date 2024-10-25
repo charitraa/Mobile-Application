@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1056243347710",
+    "project_id": "sponsorspot-3436a",
+    "storage_bucket": "sponsorspot-3436a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056243347710:android:9264ae527ee07da5e2f5af",
+        "android_client_info": {
+          "package_name": "com.example.test2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0vQqCR6RsIbYA_lSo1Hx7vHuWFUcSiDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:test2/pages/ChatApp/Conversation.dart';
+import 'package:test2/pages/ChatApp/Home.dart';
 import 'package:test2/pages/mapclass.dart';
 import './pages/ChatApp/loginpage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 void main() {
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -33,7 +40,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: FluousWelcomeScreen(),
+      home: Login(),
     );
   }
 }

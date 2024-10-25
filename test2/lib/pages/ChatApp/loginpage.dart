@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-class FluousWelcomeScreen extends StatelessWidget {
+import 'package:test2/pages/ChatApp/Home.dart';
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +31,11 @@ class FluousWelcomeScreen extends StatelessWidget {
 
 
             ElevatedButton(
-              onPressed: () {
-
+              onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pinkAccent, // Background color
