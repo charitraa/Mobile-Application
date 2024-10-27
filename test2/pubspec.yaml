@@ -35,6 +35,9 @@ dependencies:
   firebase_core:
   esewa_flutter_sdk:
     path: ./eSewa Flutter Sdk/esewa_flutter_sdk
+  shared_preferences:
+  cloud_firestore:
+  firebase_database:
 
 
   # The following adds the Cupertino Icons font to your application.
