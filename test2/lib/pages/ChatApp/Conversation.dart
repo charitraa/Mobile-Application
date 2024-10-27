@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Conversation extends StatefulWidget {
@@ -8,6 +9,30 @@ class Conversation extends StatefulWidget {
 }
 
 class _ConversationState extends State<Conversation> {
+
+  Future<void> addConversation() async {
+    CollectionReference conversation = FirebaseFirestore.instance.collection('CONVSERSATIONS');
+    try{
+      await conversation.add({
+        'name1': "BOT" + DateTime.now().day.toString(),
+        'name1': "BOT" + DateTime.now().day.toString(),
+
+        'name1': "BOT" + DateTime.now().day.toString(),
+
+      });
+      print("Conversation added sucessfully");
+
+    }
+    catch(e){
+      print("failed to add converstaion: $e");
+    }
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    addConversation();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
