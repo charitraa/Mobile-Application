@@ -1,8 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/pages/ChatApp/Conversation.dart';
 import 'package:test2/static.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   // Corrected function name from ConverstaionItem to ConversationItem
   Widget ConversationItem(Size) {
     return GestureDetector(
@@ -46,6 +54,31 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+  Future<void> addConversation() async {
+    CollectionReference conversation = FirebaseFirestore.instance.collection('CONVSERSATIONS');
+    try{
+      await conversation.add({
+        'name1': "BOT" + DateTime.now().day.toString(),
+        'name2': "BOT" + DateTime.now().day.toString(),
+        'userId1':"1",
+        'userId2':"2",
+        'datetime': DateTime.now().day.toString(),
+
+      });
+      print("Conversation added sucessfully");
+
+    }
+    catch(e){
+      print("failed to add converstaion: $e");
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    addConversation();
   }
 
   @override
