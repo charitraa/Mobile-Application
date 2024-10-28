@@ -29,7 +29,11 @@ class Login extends State<LoginWidget> {
       gotoChatPage();
     }
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    readfromstorage();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
