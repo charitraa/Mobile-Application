@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:test2/model/chartmodel.dart';
 import 'package:test2/pages/ChatApp/Conversation.dart';
 import 'package:test2/static.dart';
 
@@ -55,6 +56,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   Future<void> addConversation() async {
     CollectionReference conversation = FirebaseFirestore.instance.collection('CONVSERSATIONS');
     try{
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage> {
       print("failed to add converstaion: $e");
     }
   }
-
+  late Future<List<ConversationModel>?> futureconversationdata;
   @override
   void initState() {
     // TODO: implement initState
