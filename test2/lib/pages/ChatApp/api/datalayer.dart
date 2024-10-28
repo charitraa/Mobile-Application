@@ -2,10 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import '../../../model/chartmodel.dart';
+import '../../../model/ConversationModel.dart';
 
 class Datalayer{
   // Function to read data from Firebase Realtime Database
+  static Future<List<ChatModel>?> readfromdb() async {
+    List<ChatModel> chatDataList = [];
+    final ref = FirebaseDatabase.instance.ref();
+    final snapshot = await ref.child('chat').get();
 
+    if (snapshot.exists) {
+      // Convert snapshot data to a Map
+      Map<String, dynamic> data = Map<String, dynamic>.from(snapshot.value as Map);
+
+      // Iterate through each entry in the data
+      for (var entry in data.values) {
+        // Directly map entry to ChatModel without using json.decode
+        ChatModel chatModel = ChatModel.fromJson(Map<String, dynamic>.from(entry));
+        chatDataList.add(chatModel);
+      }
+      print('Data added to list: $chatDataList');
+      return chatDataList;
+    } else {
+      print('No data available.');
+      return null;
+    }
+  }
   // Function to get conversations and return them as List<ConversationModel>?
   static Future<List<ConversationModel>?> getConversations() async {
     CollectionReference conversations = FirebaseFirestore.instance.collection('CONVERSATIONS');
